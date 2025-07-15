@@ -1,5 +1,6 @@
 async function getAcoes() {
-  const resp = await fetch('https://brapi.dev/api/quote/list?type=stock,fii,etf&limit=1000');
+
+  const resp = await fetch(`https://brapi.dev/api/quote/list?type=stock,fii,etf&limit=1000&token=w8NbVFct33373KyrtpCvtM`);
   const data = await resp.json();
   return data.stocks || [];
 }
