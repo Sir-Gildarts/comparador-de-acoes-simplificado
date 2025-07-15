@@ -1,8 +1,11 @@
 async function getAcoes() {
   const token = 'w8NbVFct33373KyrtpCvtM';
-  const url = `https://brapi.dev/api/quote/list?type=stock,fii,etf&limit=1000&token=${token}`;
-  const resp = await fetch(url);
-  const data = await resp.json();
+  const urlOriginal = `https://brapi.dev/api/quote/list?type=stock,fii,etf&limit=1000&token=${token}`;
+  const proxy = `https://api.allorigins.win/get?url=${encodeURIComponent(urlOriginal)}`;
+
+  const resp = await fetch(proxy);
+  const result = await resp.json();
+  const data = JSON.parse(result.contents);
   return data.stocks || [];
 }
 
@@ -30,7 +33,7 @@ async function buscar() {
     const ppv = a.priceToBook || 0;
     const dy = (a.dividendYield || 0) * 100;
     const liq = (a.fullVolume || 0) / 1000;
-    const vac = 0; // vacância não disponível na API
+    const vac = 0; // vacância não disponível
     const nome = (a.companyName || '').toLowerCase();
     const setor = (a.sector || '').toLowerCase();
     const tipo = a.type || '';
