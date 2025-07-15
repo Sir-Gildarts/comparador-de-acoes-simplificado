@@ -1,12 +1,10 @@
 async function getAcoes() {
-  // Brapi tem endpoint para listar ações
-  const resp = await fetch('https://brapi.dev/api/quote/list?type=stock&limit=1000');
+  const resp = await fetch('https://brapi.dev/api/quote/list?type=stock,fii,etf&limit=1000');
   const data = await resp.json();
   return data.stocks || [];
 }
 
 function getRIlink(ticker) {
-  // Monta link para RI oficial e fallback para StatusInvest
   const base = ticker.split('.')[0].toLowerCase();
   const urlEmp = `https://ri.${base}.com.br`;
   return fetch(urlEmp, { method: 'HEAD' }).then(r => {
@@ -24,20 +22,23 @@ async function buscar() {
   const liqMin = parseFloat(document.getElementById('liqMin').value) || 0;
   const vacMax = parseFloat(document.getElementById('vacMax').value) || Infinity;
   const seg = document.getElementById('segmento').value.toLowerCase();
+  const tipoFiltro = document.getElementById('tipo').value;
 
   const filtrados = acoes.filter(a => {
     const ppv = a.priceToBook || 0;
     const dy = (a.dividendYield || 0) * 100;
     const liq = (a.fullVolume || 0) / 1000;
-    const vac = 0; // API não fornece vacância, então ignoramos por enquanto
+    const vac = 0; // vacância não disponível
     const nome = (a.companyName || '').toLowerCase();
     const setor = (a.sector || '').toLowerCase();
+    const tipo = a.type || '';
 
     return ppv >= ppvMin && ppv <= ppvMax &&
            dy >= dyMin &&
            liq >= liqMin &&
            vac <= vacMax &&
-           (seg === '' || nome.includes(seg) || setor.includes(seg));
+           (seg === '' || nome.includes(seg) || setor.includes(seg)) &&
+           (tipoFiltro === '' || tipo === tipoFiltro);
   });
 
   const tbody = document.querySelector('#tabelaResultados tbody');
