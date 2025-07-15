@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Comparador de Ações - B3</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Comparador de Ações Brasil</h1>
+  <div id="filtros">
+    <label>P/VP min <input type="number" id="ppvMin"></label>
+    <label>P/VP max <input type="number" id="ppvMax"></label>
+    <label>DY min (%) <input type="number" id="dyMin"></label>
+    <label>Liquidez min (R$ mil/dia) <input type="number" id="liqMin"></label>
+    <label>Vacância max (%) <input type="number" id="vacMax"></label>
+    <label>Segmento <input type="text" id="segmento" placeholder="ex: bancos"></label>
+    <button id="btnBuscar">Buscar</button>
+  </div>
+  <table id="tabelaResultados">
+    <thead>
+      <tr><th>Ticker</th><th>Nome</th><th>Cotação</th><th>P/VP</th><th>DY (%)</th>
+      <th>Liquidez</th><th>Vacância</th><th>Segmento</th><th>Relatório RI</th></tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+  <script src="script.js"></script>
+</body>
+</html>
