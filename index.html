@@ -14,6 +14,14 @@
     <label>Liquidez min (R$ mil/dia) <input type="number" id="liqMin"></label>
     <label>Vacância max (%) <input type="number" id="vacMax"></label>
     <label>Segmento <input type="text" id="segmento" placeholder="ex: bancos"></label>
+    <label>Tipo
+  <select id="tipo">
+    <option value="">Todos</option>
+    <option value="stock">Ação</option>
+    <option value="fii">FII</option>
+    <option value="etf">ETF</option>
+  </select>
+</label>
     <button id="btnBuscar">Buscar</button>
   </div>
   <table id="tabelaResultados">
