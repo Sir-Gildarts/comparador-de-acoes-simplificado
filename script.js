@@ -1,6 +1,7 @@
 async function getAcoes() {
-
-  const resp = await fetch(`https://brapi.dev/api/quote/list?type=stock,fii,etf&limit=1000&token=w8NbVFct33373KyrtpCvtM`);
+  const token = 'w8NbVFct33373KyrtpCvtM';
+  const url = `https://brapi.dev/api/quote/list?type=stock,fii,etf&limit=1000&token=${token}`;
+  const resp = await fetch(url);
   const data = await resp.json();
   return data.stocks || [];
 }
@@ -29,7 +30,7 @@ async function buscar() {
     const ppv = a.priceToBook || 0;
     const dy = (a.dividendYield || 0) * 100;
     const liq = (a.fullVolume || 0) / 1000;
-    const vac = 0; // vacância não disponível
+    const vac = 0; // vacância não disponível na API
     const nome = (a.companyName || '').toLowerCase();
     const setor = (a.sector || '').toLowerCase();
     const tipo = a.type || '';
